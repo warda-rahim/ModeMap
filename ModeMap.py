@@ -62,6 +62,13 @@ group1.add_argument(
     help = "Read force constants from a FORCE_CONSTANTS file (same as Phonopy --readfc option)"
     );
 
+group1.add_argument(
+    "-t", "--tolerance",
+    metavar = "symmetry tolerance",
+    type = float,
+    help = "Tolerance for finding symmetry (default=1e-5)"
+    );
+
 # The following variables control the map mode (1D/2D), the mode(s) and amplitude range(s) to be mapped, and the size of the supercell in which to generate the modulated structures.
 
 group2 = parser.add_argument_group("Map settings");
@@ -194,6 +201,7 @@ phonon = Phonopy(
     structure,
     args.SupercellMatrix,
     primitive_matrix = args.PrimitiveMatrix
+    symprec = args.tolerance
     );
 
 # Set up the force constants.
